@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="report.css">
+
 # 实验一 逻辑门电路测试之一
 <div class="name"> 实验人:杨庆龙<br/>学号：1500012956</div>
 
