@@ -33,10 +33,7 @@ int isMatch(char* temp,int dicloc,int wordloc) {
 
 int main() {
   int length,state,count;
-  int* point;
-  char* temp;
-  while(scanf("%s",dic[0])) {
-    length = 1;
+    length = 0;
     while(scanf("%s",dic[length])) {
       if(dic[length][0] == '#') {
         break;
@@ -51,19 +48,15 @@ int main() {
       }
       else {
         state = count = 0;
-        point = indexs;
         printf("%s",word);
-        temp = dic[0];
-        for (int i = 0;i < length && state == 0;temp ++,i ++) {
+        for (int i = 0;i < length && state == 0;i ++) {
           flag = 0;
-          switch (isMatch(temp,0,0)) {
+          switch (isMatch(dic[i],0,0)) {
             case 2:
               state = 1;
               break;
             case 1:
-              *point = i;
-              point ++;
-              count ++;
+              indexs[count ++] = i;
               break;
             default:
               break;
@@ -74,13 +67,11 @@ int main() {
         }
         else {
           printf(":");
-          point = indexs;
-          for(int i = 0;i < count;i ++,point++) {
-            printf(" %s",dic[*point]);
+          for(int i = 0;i < count;i ++) {
+            printf(" %s",dic[indexs[i]]);
           }
         }
         printf("\n");
       }
     }
-  }
 }
