@@ -1,7 +1,13 @@
-<link rel="stylesheet" href="report.css">
+<head>
+<style type="text/css">
+h1 {text-align: center;font-size: 20px}
+h2 {font-size: 10px}
+.author {text-align:center;font-size: 15px}
+</style>
+</head>
 
 # 实验一 逻辑门电路测试之一
-<div class="name"> 实验人:杨庆龙<br/>学号：1500012956</div>
+<div class="author"> 实验人:杨庆龙<br/>学号：1500012956</div>
 
 ## 实验原理
 ### 输入短路电流$I_{rd}$
