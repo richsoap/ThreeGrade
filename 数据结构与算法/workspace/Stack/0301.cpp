@@ -14,7 +14,7 @@ int main() {
   for(int i = 0;i < N;i ++) {
     scanf("%d",&temp);
     while(!maxData.empty()) {
-      if(i - maxData.front().location >= K) {
+      if((i - maxData.front().location) >= K) {
         maxData.pop_front();
         continue;
       }
@@ -26,12 +26,13 @@ int main() {
       }
     }
     while(!minData.empty()) {
-      if(i - minData.front().location >= K) {
+      if((i - minData.front().location) >= K) {
         minData.pop_front();
         continue;
       }
-      else if(minData.front().value >= temp) {
-        minData.pop_front();
+      else if(minData.back().value >= temp) {
+        minData.pop_back();
+
       }
       else {
         break;
