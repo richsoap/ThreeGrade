@@ -4,9 +4,7 @@ using namespace std;
 
 int main() {
   int N,K,P,count;
-  scanf("%d",&N);
-  scanf("%d",&K);
-  scanf("%d",&P);
+  while(scanf("%d %d %d",&N,&K,&P) != EOF) {
   list<int> cards,result;
   list<int>::iterator it;
   cards.clear();
@@ -17,7 +15,7 @@ int main() {
   it = cards.begin();
   count = 0;
   while(!cards.empty()) {
-        if((++count %= N) == 0) 
+        if((++count %= N) == 0)
           result.push_back(*it);
         it = cards.erase(it);
         if(it == cards.end())
@@ -28,8 +26,10 @@ int main() {
               it = cards.begin();
         }
   }
+  result.sort();
   for(it = result.begin();it != result.end();it ++) {
     printf("%d\n",*it);
   }
+}
   return 0;
 }
