@@ -1,6 +1,0 @@
-# 静电场
-## 静电场的旋度
-###旋度的定义
-$$lim_{\delta \to 0}\frac{}$$
-### 静电场旋度为0
-$$\circle_L E*dl = \frac{Q}{4\pi \epislong_0}\circle\frac{r^}{r^3}=\frac{Q}{4\pi \epislong_0}\circle\frac{dr}{r^3}$$
