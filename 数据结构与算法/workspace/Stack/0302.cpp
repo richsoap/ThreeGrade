@@ -12,5 +12,6 @@ int main() {
     int N;
     scanf("%d",&N );
     printf("%d", map[N][N]);
+    scanf("%d",&N);
     return 0;
 }
