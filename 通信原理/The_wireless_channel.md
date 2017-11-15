@@ -23,7 +23,11 @@ The longer signals go, the weaker signals are.
 Hundred of wave lengths.
 ### Shadowing(Large Scale)
 Big objects may cause some smal variation.
+Log-norm distribution.
+$$x=r_1\cdot r_2 \ldots r_n\\
+log(x)=log(r_1)+log(r_2)\ldots+log(r_n)~Gaussian distribution$$
 ### Multipath Fading(Small Scale)
+Gaussian distribution.
 Less than a wave length.
 ## Multipath fading
 $$Base expression: y(t)=h(t,\tau)\\h(\tau)=\sum_nc_ne^{-j\phi_n}\delta(\tau-\tau_n)$$
