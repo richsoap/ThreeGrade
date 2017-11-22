@@ -91,7 +91,7 @@ The makeup of the committee reflects Xi's efforts to foster party unity by strik
 ### 十九大，习近平的“加冕典礼”[](https://cn.nytimes.com/slideshow/20171018/c18china-party-ss/#1)
 
 
-: Griffiths, J. (2017). What an all-powerful Xi Jinping means for the rest of the world. [online] CNN. Available at: http://edition.cnn.com/2017/10/25/asia/xi-jinping-china-trump/index.html [Accessed 6 Nov. 2017].
+ Griffiths, J. (2017). What an all-powerful Xi Jinping means for the rest of the world. [online] CNN. Available at: http://edition.cnn.com/2017/10/25/asia/xi-jinping-china-trump/index.html [Accessed 6 Nov. 2017].
 
  Griffiths, J. (2017). The ideological war playing out on China's internet. [online] CNN. Available at: http://edition.cnn.com/2017/10/15/asia/china-party-congress-internet-censorship/index.html [Accessed 6 Nov. 2017].
 
