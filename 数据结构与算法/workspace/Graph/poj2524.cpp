@@ -34,7 +34,6 @@ int main() {
 		count = 0;
 		while(m --) {
 			scanf("%d %d",&j,&k);
-			printf("read\n");
 			if(!isSameParent(j,k))
 			  count ++;
 		}
