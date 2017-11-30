@@ -1,31 +1,17 @@
-|$Q_3Q_2Q_1Q_0$|$D_0$|
-|---|---|
-|0||
-|1||
-|2||
-|3||
-|4||
-|5||
-|6||
-|7||
-|8||
-|9||
-|10||
-|11||
-|12||
-|13||
-|14||
-|15||
+# 实验九 程序控制反馈移位寄存器
+<div style="text-align:center">实验人:杨庆龙<br/>学号:1500012956</div>
 
-|$Q_1Q_0$/$Q_3Q_2$|00|01|11|10|
-|---|---|---|---|---|
-|00|||||
-|01|||||
-|11|||||
-|10|||||
-
-### Mod0
-
+## 实验目的
+1. 了解程序控制反馈移位寄存器的工作原理
+2. 掌握带自启动的反馈移位寄存器电路的设计方法
+3. 学习可编程逻辑器件GAL的应用
+## 实验原理
+### 系统构成框架<br/>
+该系统有串行移位寄存器和组合逻辑电路组成。由串行移位寄存器实现状态的改变，再用组合逻辑电路反馈下一状态的输入信号，利用组合逻辑组成不同码型的反馈移位寄存器。
+### 码序列与反馈电路电路的逻辑函数<br/>
+#### 码型1
+从码型1的状态转换图得到设计真值表
+###### 移位寄存器码型1反馈逻辑函数设计真值表
 |$Q_3Q_2Q_1Q_0$|$D_0$|
 |---|---|
 |0|x|
@@ -44,7 +30,7 @@
 |13|x|
 |14|x|
 |15|x|
-
+###### 移位寄存器码型1反馈逻辑函数卡诺图
 |$Q_1Q_0/Q_3Q_2$|00|01|11|10|
 |---|---|---|---|---|
 |00|x|0|x|1|
@@ -52,10 +38,13 @@
 |11|x|x|x|x|
 |10|0|x|x|x|
 
-表达式$D_0=\overline{Q_0+Q_1+Q_2}$
+化简得表达式$D_0=\overline{Q_0+Q_1+Q_2}$
+###### 移位寄存器码型1的状态转移图
 ![Method0,work](exm7photo/Method_0.PNG)
 
-### Mod1
+#### 码型2
+
+###### 移位寄存器码型2反馈逻辑函数设计真值表
 |$Q_3Q_2Q_1Q_0$|$D_0$|
 |---|---|
 |0|1|
@@ -75,6 +64,7 @@
 |14|0|
 |15|0|
 
+###### 移位寄存器码型2反馈逻辑函数卡诺图
 |$Q_1Q_0$/$Q_3Q_2$|00|01|11|10|
 |---|---|---|---|---|
 |00|1|x|0|0|
@@ -82,11 +72,16 @@
 |11|1|1|0|x|
 |10|x|x|0|x|
 
-表达式方式一$D_0=\overline{Q_3}$
+表达式$D_0=\overline{Q_3}$
+###### 移位寄存器码型2状态转移图
 ![Method1.not.work](exm7photo/Method_1_0.PNG)
-表达式方式二$D_0=\overline{Q_3}+Q_3\overline{Q_2}\overline{Q_1}Q_0$
+从图中可以看到，该状态图共有两个循环态，不能保证电路工作在我们想要的循环上，所以需要再加一项让电路能最终回到我们想要的循环。
+表达式$D_0=\overline{Q_3}+Q_3\overline{Q_2}\overline{Q_1}Q_0$
+###### 意味寄存器码型2状态转移图
 ![Method1.work](exm7photo/Method_1_1.PNG)
-### Mod2
+加上一项后，可以看到电路能够工作在我们想要的状态，逻辑成立
+#### 码型3
+###### 移位寄存器码型3反馈逻辑函数设计真值表
 |$Q_3Q_2Q_1Q_0$|$D_0$|
 |---|---|
 |0|x|
@@ -106,6 +101,7 @@
 |14|x|
 |15|x|
 
+###### 移位寄存器码型3反馈逻辑函数卡诺图
 |$Q_1Q_0$/$Q_3Q_2$|00|01|11|10|
 |---|---|---|---|---|
 |00|x|1|x|x|
@@ -113,9 +109,250 @@
 |11|x|x|x|0|
 |10|x|1|x|0|
 
-表达式方式一$D_0=\overline{Q_3}$
+表达式$D_0=\overline{Q_3}$
+
+###### 移位寄存器码型3状态转移图
 ![Method2.not.work](exm7photo/Method_1_0.PNG)
-表达式方式二$D_0=\overline{Q_3}+Q_3Q_2\overline{Q_1Q_0}$
+可以看到，该电路状态有着码型2相同的问题，考虑增加一项
+
+表达式$D_0=\overline{Q_3}+Q_3Q_2\overline{Q_1Q_0}$
+###### 移位寄存器码型3状态转移图
 ![Method2.work](exm7photo/Method_2_1.PNG)
 
-### Mod3
+#### 码型4
+###### 移位寄存器码型4反馈逻辑函数设计真值表
+|$Q_3Q_2Q_1Q_0$|$D_0$|
+|---|---|
+|0|x|
+|1|1|
+|2|0|
+|3|1|
+|4|0|
+|5|1|
+|6|0|
+|7|1|
+|8|1|
+|9|0|
+|10|1|
+|11|0|
+|12|1|
+|13|0|
+|14|1|
+|15|0|
+###### 移位寄存器码型4反馈逻辑函数卡诺图
+|$Q_1Q_0$/$Q_3Q_2$|00|01|11|10|
+|---|---|---|---|---|
+|00|x|0|1|1|
+|01|1|1|0|0|
+|11|1|1|0|0|
+|10|1|0|1|1|
+
+表达式$D=\overline{Q_3}Q_0+Q_3\overline{Q_0}+\overline{Q_3Q_2Q_1q_0}$
+###### 移位寄存器码型4状态转移图
+![Method3.work](exm7photo/Method_3.PNG)
+
+### 电路结构
+电路上方为通过按键开关实现电路工作状态切换的状态控制电路。<br/>左下方为时钟整形电路，用于增强输入时钟的驱动能力。
+
+## 实验内容
+### 设计电路
+从之前的分析中可以得到，该电路的逻辑表达式为
+|模式|表达式|
+|---|---|
+|00|$D_0=\overline{Q_0+Q_1+Q_2}$|
+|01|$D_0=\overline{Q_3}+Q_3\overline{Q_2}\overline{Q_1}Q_0$|
+|10|$D_0=\overline{Q_3}+Q_3Q_2\overline{Q_1Q_0}$|
+|11|$D=\overline{Q_3}Q_0+Q_3\overline{Q_0}+\overline{Q_3Q_2Q_1q_0}$|
+
+### 检查各部分电路
+检查实验板的GAL外围电路如时钟整形，程序计数器和LED状态表示电路能否正常工作，认清各部分和控制连续及其输入关系
+
+### 编译即调试
+1. 编译设计好的程序，并将程序烧录到芯片中
+2. 将GAL插到电路板上，观察波形是否符合要求
+
+### 源码
+```
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company:
+// Engineer:
+//
+// Create Date: 2017/11/29 22:40:09
+// Design Name:
+// Module Name: adder
+// Project Name:
+// Target Devices:
+// Tool Versions:
+// Description:
+//
+// Dependencies:
+//
+// Revision:
+// Revision 0.01 - File Created
+// Additional Comments:
+//
+//////////////////////////////////////////////////////////////////////////////////
+
+
+module adder(
+    input button,
+    output [1:0] C
+    );
+
+    reg [1:0]C;
+
+    always@(posedge button)
+    begin
+        C[0] <= ~C[0];
+        C[1] <= (~C[1]&C[0])|(~C[0]&C[1]);
+    end
+
+endmodule
+```
+
+```
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company:
+// Engineer:
+//
+// Create Date: 2017/11/29 22:40:09
+// Design Name:
+// Module Name: feedback
+// Project Name:
+// Target Devices:
+// Tool Versions:
+// Description:
+//
+// Dependencies:
+//
+// Revision:
+// Revision 0.01 - File Created
+// Additional Comments:
+//
+//////////////////////////////////////////////////////////////////////////////////
+
+
+module feedback(
+    input [3:0] Q,
+    input [1:0] C,
+    output D
+    );
+
+    wire [3:0]inD;
+
+    assign inD[0]=~(Q[0]|Q[1]|Q[2]);
+    assign inD[1]=~(Q[3])|(Q[3]&~Q[2]&~Q[1]&Q[0]);
+    assign inD[2]=~(Q[3])|(Q[3]&Q[2]&~Q[1]&~Q[0]);
+    assign inD[3]=(Q[0]^Q[3])|(~Q[0]&~Q[1]&~Q[2]&~Q[3])
+
+    assign D=(inD[0]&~C[0]&~C[1])|(inD[1]&C[0]&~C[1])|(inD[2]&~C[0]&C[1])|(inD[3]&C[0]&C[1]);
+
+endmodule
+
+```
+
+```
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company:
+// Engineer:
+//
+// Create Date: 2017/11/29 22:40:09
+// Design Name:
+// Module Name: move
+// Project Name:
+// Target Devices:
+// Tool Versions:
+// Description:
+//
+// Dependencies:
+//
+// Revision:
+// Revision 0.01 - File Created
+// Additional Comments:
+//
+//////////////////////////////////////////////////////////////////////////////////
+
+
+module move(
+    input D,
+    input clk,
+    output [3:0] Q
+    );
+
+    reg [3:0]Q;
+
+    always@(posedge clk)
+    begin
+        Q[0]<=D;
+        Q[1]<=Q[0];
+        Q[2]<=Q[1];
+        Q[3]<=Q[2];
+    end
+
+endmodule
+
+```
+
+```
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company:
+// Engineer:
+//
+// Create Date: 2017/11/29 22:40:09
+// Design Name:
+// Module Name: top
+// Project Name:
+// Target Devices:
+// Tool Versions:
+// Description:
+//
+// Dependencies:
+//
+// Revision:
+// Revision 0.01 - File Created
+// Additional Comments:
+//
+//////////////////////////////////////////////////////////////////////////////////
+
+module top(
+    input button,
+    input clk,
+    output [1:0] C,
+    output [3:0] Q
+    );
+    reg [1:0]C;
+    reg [3:0]Q;
+
+    wire D;
+    wire [1:0]tempC;
+    wire [3:0]tempQ;
+    adder(
+        .button(button),
+        .C(tempC[1:0])
+        );
+    feedback(
+            .Q(Q[3:0]),
+            .C(C[1:0]),
+            .D(D)
+            );
+     move(
+      .D(D),
+      .clk(clk),
+      .Q(tempQ[3:0])
+     );
+
+   always@(*)
+      begin
+        C[1:0]<=tempC[1:0];
+        Q[3:0]<=tempQ[3:0];
+      end
+
+
+
+endmodule
+
+```
