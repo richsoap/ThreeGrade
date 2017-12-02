@@ -1,0 +1,177 @@
+
+// Default Markdown Preview styles
+
+// These are the default Markdown Preview styles.
+// They use the syntax-variables to adapt to the color scheme of syntax themes.
+
+
+@import "syntax-variables";
+
+.markdown-preview:not([data-use-github-style]) {
+
+  @fg: @syntax-text-color;
+  @bg: @syntax-background-color;
+
+  @fg-accent: @syntax-cursor-color;
+  @fg-strong: contrast(@bg, darken(@fg, 32%), lighten(@fg, 32%));
+  @fg-subtle: contrast(@fg, lighten(@fg, 16%), darken(@fg, 16%));
+
+  @border: contrast(@bg, lighten(@bg, 16%), darken(@bg, 16%));
+
+  @margin: 1.5em;
+
+
+  padding: 1em;
+  font-size: 0.95em;
+  color: @fg;
+  background-color: @bg;
+  overflow: auto;
+
+  & > :first-child {
+    margin-top: 0;
+  }
+
+
+  // Headings --------------------
+
+  h1, h2, h3, h4, h5, h6 {
+    line-height: 1.2;
+    margin-top: @margin;
+    margin-bottom: @margin/3;
+    color: @fg-strong;
+  }
+
+  h1 { font-size: 1.3em; font-weight: 300;text-align: center;}
+  h2 { font-size: 1.1em; font-weight: 400; }
+  h3 { font-size: 1.0em; font-weight: 500; }
+  h4 { font-size: 0.95em; font-weight: 500; }
+  h5 { font-size: 0.95em; font-weight: 500; }
+  h6 { font-size: 1em; font-weight: 600;text-align: center;}
+
+
+  // Emphasis --------------------
+
+  strong {
+    color: @fg-strong;
+  }
+
+  del {
+    color: @fg-subtle;
+  }
+
+
+caption {
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 1em;
+  font-weight: 400;
+}
+
+
+  // Link --------------------
+
+  a,
+  a code {
+    color: @fg-accent;
+  }
+
+
+  // Images --------------------
+
+  img {
+    max-width: 100%;
+    height: 340px;
+  }
+
+
+  // Paragraph --------------------
+
+  & > p {
+    margin-top: 0;
+    margin-bottom: @margin;
+    font-size: 0.95em
+  }
+
+
+  // List --------------------
+
+  & > ul,
+  & > ol {
+    margin-bottom: @margin;
+  }
+
+
+  // Blockquotes --------------------
+
+  blockquote {
+    margin: @margin 0;
+    font-size: inherit;
+    color: @fg-subtle;
+    border-color: @border;
+    border-width: 4px;
+  }
+
+
+  // HR --------------------
+
+  hr {
+    margin: @margin*2 0;
+    border-top: 2px dashed @border;
+    background: none;
+  }
+
+
+  // Table --------------------
+
+
+
+  table {
+      margin-left: auto;
+      margin-right: auto;
+  }
+
+  th {
+    color: @fg-strong;
+  }
+
+  th,
+  td {
+    font-size: 0.5em;
+    padding: .66em 1em;
+    border: 0.5px solid @border;
+  }
+
+
+  // Code --------------------
+
+  pre,
+  code {
+    color: @fg-strong;
+    background-color: contrast(@syntax-background-color, lighten(@syntax-background-color, 8%), darken(@syntax-background-color, 6%));
+  }
+
+  pre,
+  atom-text-editor {
+    margin: @margin 0;
+    padding: 1em;
+    font-size: .92em;
+    border-radius: 3px;
+    background-color: contrast(@syntax-background-color, lighten(@syntax-background-color, 4%), darken(@syntax-background-color, 4%));
+  }
+
+
+  // KBD --------------------
+
+  kbd {
+    color: @fg-strong;
+    border: 1px solid @border;
+    border-bottom: 2px solid darken(@border, 6%);
+    background-color: contrast(@syntax-background-color, lighten(@syntax-background-color, 8%), darken(@syntax-background-color, 6%));
+  }
+
+}
+// Class ---------------------
+.author {
+  font-size: 0.95em;
+  text-align: center;
+}
