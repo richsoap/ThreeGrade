@@ -19,3 +19,9 @@ Griffiths, J. (2017). What an all-powerful Xi Jinping means for the rest of the 
  胡伟俊 .(2017). 十九大后的中国：社会主要矛盾改变的五重含义.[online] FT Chinese. Available at:http://www.ftchinese.com/story/001074875[Accessed 6 NOV. 2017]
 
  纽约时报中文网 .(2017). 十九大，习近平的“加冕典礼”.[online] 纽约时报中文网. Available at:https://cn.nytimes.com/slideshow/20171018/c18china-party-ss/#1[Accessed 6 NOV. 2017]
+
+
+lenet，数字手写体识别，做一个完整的演示
+有一张图片，写入到FPGA里，再给一个输出
+
+软硬结合，做人工智能方面的事

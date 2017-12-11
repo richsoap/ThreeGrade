@@ -1,0 +1,222 @@
+sds++ -sds-pf zed -sds-hw conv_bi conv_bi.cpp -sds-end -sds-hw conv_bf conv_bi.cpp -sds-end -Wall -O3 -c -MMD -MP -MF"naiveMNIST.d" -I ~/zlib/zlib-master/build/include -L ~/zlib/zlib-master/build/lib -lz naiveMNIST.cpp -o naiveMNIST.o
+INFO: [SDSoC 0-0] Create data motion intermediate representation
+clang: warning: -lz: 'linker' input unused
+clang: warning: argument unused during compilation: '-L/home/hqiu/zlib/zlib-master/build/lib'
+INFO: [SDSoC 0-0] Compiling /tmp/conv_mnist_pc/naiveMNIST.cpp
+/tmp/conv_mnist_pc/naiveMNIST.cpp: In function ‘cnpy::NpyArray load_npz(cnpy::npz_t&, int, int, std::vector<int>)’:
+/tmp/conv_mnist_pc/naiveMNIST.cpp:122:18: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+     for(int i=0;i<vec.size();++i){
+                  ^
+/tmp/conv_mnist_pc/naiveMNIST.cpp: In function ‘int main()’:
+/tmp/conv_mnist_pc/naiveMNIST.cpp:198:17: warning: typedef ‘w1_type’ locally defined but not used [-Wunused-local-typedefs]
+     typedef int w1_type[FS][FS];
+                 ^
+/tmp/conv_mnist_pc/naiveMNIST.cpp:216:21: warning: typedef ‘w2_type’ locally defined but not used [-Wunused-local-typedefs]
+     typedef bi_type w2_type[C][FS][FS];
+                     ^
+/tmp/conv_mnist_pc/naiveMNIST.cpp:234:21: warning: typedef ‘w3_type’ locally defined but not used [-Wunused-local-typedefs]
+     typedef bi_type w3_type[C][FS][FS];
+                     ^
+/tmp/conv_mnist_pc/naiveMNIST.cpp:256:21: warning: typedef ‘w4_type’ locally defined but not used [-Wunused-local-typedefs]
+     typedef bi_type w4_type[NC];
+                     ^
+sds++ log file saved as /tmp/conv_mnist_pc/_sds/reports/sds_naiveMNIST.log
+
+sds++ -sds-pf zed -sds-hw conv_bi conv_bi.cpp -sds-end -sds-hw conv_bf conv_bi.cpp -sds-end -Wall -O3 -c -MMD -MP -MF"conv_bi.d" -I ~/zlib/zlib-master/build/include -L ~/zlib/zlib-master/build/lib -lz conv_bi.cpp -o conv_bi.o
+INFO: [SDSoC 0-0] Processing -sds-hw block for conv_bi
+INFO: [SDSoC 0-0] Processing -sds-hw block for conv_bf
+INFO: [SDSoC 0-0] Create data motion intermediate representation
+clang: warning: -lz: 'linker' input unused
+clang: warning: argument unused during compilation: '-L/home/hqiu/zlib/zlib-master/build/lib'
+/tmp/conv_mnist_pc/conv_bi.cpp:153:2: warning: unused label 'calculate_lp' [-Wunused-label]
+        calculate_lp:
+        ^~~~~~~~~~~~~
+/tmp/conv_mnist_pc/conv_bi.cpp:288:10: warning: 'PARA' macro redefined [-Wmacro-redefined]
+        #define PARA 4
+                ^
+/tmp/conv_mnist_pc/conv_bi.cpp:60:10: note: previous definition is here
+        #define PARA 16
+                ^
+/tmp/conv_mnist_pc/conv_bi.cpp:372:2: warning: unused label 'calculate_lp' [-Wunused-label]
+        calculate_lp:
+        ^~~~~~~~~~~~~
+INFO: [SDSoC 0-0] Performing accelerator source linting for conv_bi
+warning: argument unused during compilation: '-L/home/hqiu/zlib/zlib-master/build/lib'
+INFO: [SDSoC 0-0] Performing accelerator source linting for conv_bf
+warning: argument unused during compilation: '-L/home/hqiu/zlib/zlib-master/build/lib'
+INFO: [SDSoC 0-0] Performing pragma generation
+warning: argument unused during compilation: '-L/home/hqiu/zlib/zlib-master/build/lib'
+INFO: [SDSoC 0-0] Successfully generated tcl script: /tmp/conv_mnist_pc/_sds/vhls/conv_bi.tcl
+INFO: [SDSoC 0-0] Moving function conv_bi to Programmable Logic
+INFO: [SDSoC 0-0] Performing pragma generation
+warning: argument unused during compilation: '-L/home/hqiu/zlib/zlib-master/build/lib'
+INFO: [SDSoC 0-0] Successfully generated tcl script: /tmp/conv_mnist_pc/_sds/vhls/conv_bf.tcl
+INFO: [SDSoC 0-0] Moving function conv_bf to Programmable Logic
+sds++ log file saved as /tmp/conv_mnist_pc/_sds/reports/sds_conv_bi.log
+
+sds++ -sds-pf zed -sds-hw conv_bi conv_bi.cpp -sds-end -sds-hw conv_bf conv_bi.cpp -sds-end -Wall -O3 -c -MMD -MP -MF"cnpy.d" -I ~/zlib/zlib-master/build/include -L ~/zlib/zlib-master/build/lib -lz cnpy.cpp -o cnpy.o
+INFO: [SDSoC 0-0] Create data motion intermediate representation
+clang: warning: -lz: 'linker' input unused
+clang: warning: argument unused during compilation: '-L/home/hqiu/zlib/zlib-master/build/lib'
+INFO: [SDSoC 0-0] Compiling /tmp/conv_mnist_pc/cnpy.cpp
+/tmp/conv_mnist_pc/cnpy.cpp: In function ‘char cnpy::BigEndianTest()’:
+/tmp/conv_mnist_pc/cnpy.cpp:14:25: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
+     short y = *(short*) x;
+                         ^
+sds++ log file saved as /tmp/conv_mnist_pc/_sds/reports/sds_cnpy.log
+
+sds++ -sds-pf zed -sds-hw conv_bi conv_bi.cpp -sds-end -sds-hw conv_bf conv_bi.cpp -sds-end -O3 naiveMNIST.o conv_bi.o cnpy.o -o mnist_pc.elf 
+INFO: [SDSoC 0-0] Analyzing object files
+... /tmp/conv_mnist_pc/naiveMNIST.o
+... /tmp/conv_mnist_pc/conv_bi.o
+... /tmp/conv_mnist_pc/cnpy.o
+INFO: [SDSoC 0-0] Generating data motion network
+INFO: [SDSoC 0-0] Analyzing hardware accelerators...
+INFO: [SDSoC 0-0] Analyzing callers to hardware accelerators...
+INFO: [SDSoC 0-0] Scheduling data transfer graph for partition 0
+INFO: [SDSoC 0-0] Creating data motion network hardware for partition 0
+INFO: [SDSoC 0-0] Creating software stub functions for partition 0
+INFO: [SDSoC 0-0] Generating data motion network report for partition 0
+INFO: [SDSoC 0-0] Rewriting caller code
+INFO: [SDSoC 0-0] Creating block diagram (BD), address map, port information and device registration for partition 0 (this may take a few minutes)
+system_linker started at Thu Dec 08 10:44:10 CST 2016
+INFO: [SDSoC 0-0] Copying address map
+INFO: [SDSoC 0-0] Creating port and device registration data
+system_linker completed at Thu Dec 08 10:45:46 CST 2016
+INFO: [SDSoC 0-0] Rewrite caller functions
+warning: argument unused during compilation: '-L/home/hqiu/zlib/zlib-master/build/lib'
+INFO: [SDSoC 0-0] Compile caller rewrite file /tmp/conv_mnist_pc/_sds/swstubs/naiveMNIST.cpp
+/tmp/conv_mnist_pc/_sds/swstubs/naiveMNIST.cpp: In function ‘cnpy::NpyArray load_npz(cnpy::npz_t&, int, int, std::vector<int>)’:
+/tmp/conv_mnist_pc/_sds/swstubs/naiveMNIST.cpp:122:18: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+     for(int i=0;i<vec.size();++i){
+                  ^
+/tmp/conv_mnist_pc/_sds/swstubs/naiveMNIST.cpp: In function ‘int main()’:
+/tmp/conv_mnist_pc/_sds/swstubs/naiveMNIST.cpp:200:17: warning: typedef ‘w1_type’ locally defined but not used [-Wunused-local-typedefs]
+     typedef int w1_type[FS][FS];
+                 ^
+/tmp/conv_mnist_pc/_sds/swstubs/naiveMNIST.cpp:218:21: warning: typedef ‘w2_type’ locally defined but not used [-Wunused-local-typedefs]
+     typedef bi_type w2_type[C][FS][FS];
+                     ^
+/tmp/conv_mnist_pc/_sds/swstubs/naiveMNIST.cpp:236:21: warning: typedef ‘w3_type’ locally defined but not used [-Wunused-local-typedefs]
+     typedef bi_type w3_type[C][FS][FS];
+                     ^
+/tmp/conv_mnist_pc/_sds/swstubs/naiveMNIST.cpp:258:21: warning: typedef ‘w4_type’ locally defined but not used [-Wunused-local-typedefs]
+     typedef bi_type w4_type[NC];
+                     ^
+INFO: [SDSoC 0-0] Prepare hardware access API functions
+INFO: [SDSoC 0-0] Create accelerator stub functions
+INFO: [SDSoC 0-0] Compile hardware access API functions
+INFO: [SDSoC 0-0] Compile accelerator stub functions
+conv_bi.cpp:319:0: warning: "PARA" redefined
+  #define PARA 4
+ ^
+conv_bi.cpp:60:0: note: this is the location of the previous definition
+  #define PARA 16
+ ^
+conv_bi.cpp: In function ‘void conv_bi(bi_type (*)[2][28], bi_type (*)[2][3][3], bi_type (*)[2][28], float*, float*)’:
+conv_bi.cpp:153:2: warning: label ‘calculate_lp’ defined but not used [-Wunused-label]
+  calculate_lp:
+  ^
+conv_bi.cpp: In function ‘void conv_bf(float (*)[28], int (*)[3][3], bi_type (*)[2][28], float*, float*)’:
+conv_bi.cpp:403:2: warning: label ‘calculate_lp’ defined but not used [-Wunused-label]
+  calculate_lp:
+  ^
+                 from /opt/Xilinx/SDSoC/2016.2/Vivado_HLS/2016.2/include/ap_int.h:74,
+                 from /opt/Xilinx/SDSoC/2016.2/Vivado_HLS/2016.2/include/ap_fixed.h:67,
+                 from /tmp/conv_mnist_pc/conv_bi.h:17,
+                 from conv_bi.cpp:1:
+/opt/Xilinx/SDSoC/2016.2/Vivado_HLS/2016.2/include/etc/ap_private.h: In function ‘void store_output_bi(ap_int<16> (*)[28], bi_type (*)[28], float*, float*)’:
+/opt/Xilinx/SDSoC/2016.2/Vivado_HLS/2016.2/include/etc/ap_private.h:2046:9: warning: ‘tmp.ap_private<64, false, true>::VAL’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+         VAL |= (1ULL << (bitPosition));
+         ^
+conv_bi.cpp:106:10: note: ‘tmp.ap_private<64, false, true>::VAL’ was declared here
+  bi_type tmp;
+          ^
+                 from /opt/Xilinx/SDSoC/2016.2/Vivado_HLS/2016.2/include/ap_int.h:74,
+                 from /opt/Xilinx/SDSoC/2016.2/Vivado_HLS/2016.2/include/ap_fixed.h:67,
+                 from /tmp/conv_mnist_pc/conv_bi.h:17,
+                 from conv_bi.cpp:1:
+/opt/Xilinx/SDSoC/2016.2/Vivado_HLS/2016.2/include/etc/ap_private.h: In function ‘void store_output_bf(float (*)[28], bi_type (*)[28], float*, float*)’:
+/opt/Xilinx/SDSoC/2016.2/Vivado_HLS/2016.2/include/etc/ap_private.h:2046:9: warning: ‘tmp.ap_private<64, false, true>::VAL’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+         VAL |= (1ULL << (bitPosition));
+         ^
+conv_bi.cpp:363:10: note: ‘tmp.ap_private<64, false, true>::VAL’ was declared here
+  bi_type tmp;
+          ^
+conv_bi.cpp:319:0: warning: "PARA" redefined
+  #define PARA 4
+ ^
+conv_bi.cpp:60:0: note: this is the location of the previous definition
+  #define PARA 16
+ ^
+conv_bi.cpp: In function ‘void conv_bi(bi_type (*)[2][28], bi_type (*)[2][3][3], bi_type (*)[2][28], float*, float*)’:
+conv_bi.cpp:153:2: warning: label ‘calculate_lp’ defined but not used [-Wunused-label]
+  calculate_lp:
+  ^
+conv_bi.cpp: In function ‘void conv_bf(float (*)[28], int (*)[3][3], bi_type (*)[2][28], float*, float*)’:
+conv_bi.cpp:403:2: warning: label ‘calculate_lp’ defined but not used [-Wunused-label]
+  calculate_lp:
+  ^
+                 from /opt/Xilinx/SDSoC/2016.2/Vivado_HLS/2016.2/include/ap_int.h:74,
+                 from /opt/Xilinx/SDSoC/2016.2/Vivado_HLS/2016.2/include/ap_fixed.h:67,
+                 from /tmp/conv_mnist_pc/conv_bi.h:17,
+                 from conv_bi.cpp:1:
+/opt/Xilinx/SDSoC/2016.2/Vivado_HLS/2016.2/include/etc/ap_private.h: In function ‘void store_output_bi(ap_int<16> (*)[28], bi_type (*)[28], float*, float*)’:
+/opt/Xilinx/SDSoC/2016.2/Vivado_HLS/2016.2/include/etc/ap_private.h:2046:9: warning: ‘tmp.ap_private<64, false, true>::VAL’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+         VAL |= (1ULL << (bitPosition));
+         ^
+conv_bi.cpp:106:10: note: ‘tmp.ap_private<64, false, true>::VAL’ was declared here
+  bi_type tmp;
+          ^
+                 from /opt/Xilinx/SDSoC/2016.2/Vivado_HLS/2016.2/include/ap_int.h:74,
+                 from /opt/Xilinx/SDSoC/2016.2/Vivado_HLS/2016.2/include/ap_fixed.h:67,
+                 from /tmp/conv_mnist_pc/conv_bi.h:17,
+                 from conv_bi.cpp:1:
+/opt/Xilinx/SDSoC/2016.2/Vivado_HLS/2016.2/include/etc/ap_private.h: In function ‘void store_output_bf(float (*)[28], bi_type (*)[28], float*, float*)’:
+/opt/Xilinx/SDSoC/2016.2/Vivado_HLS/2016.2/include/etc/ap_private.h:2046:9: warning: ‘tmp.ap_private<64, false, true>::VAL’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+         VAL |= (1ULL << (bitPosition));
+         ^
+conv_bi.cpp:363:10: note: ‘tmp.ap_private<64, false, true>::VAL’ was declared here
+  bi_type tmp;
+          ^
+INFO: [SDSoC 0-0] Link application ELF file
+INFO: [SDSoC 0-0] Enable generation of hardware programming files
+INFO: [SDSoC 0-0] Enable generation of boot files
+INFO: [SDSoC 0-0] Calling system_linker for partition 0
+system_linker started at Thu Dec 08 10:45:56 CST 2016
+INFO: [SDSoC 0-0] Generating bitstream for platform zed.
+      This may take some time to complete
+... [10:54:03] Starting synth_design
+... [10:54:08] Starting RTL Elaboration : Time (s): cpu = 00:00:18 ; elapsed = 00:00:19 . Memory (MB): peak = 1180.746 ; gain = 310.430 ; free physical = 3908 ; free virtual = 13066
+... [10:54:29] Start Loading Part and Timing Information
+... [10:54:29] Start Applying 'set_property' XDC Constraints
+... [10:54:29] Start RTL Component Statistics 
+... [10:54:29] Start RTL Hierarchical Component Statistics 
+... [10:54:29] Start Part Resource Summary
+... [10:54:29] Start Parallel Synthesis Optimization  : Time (s): cpu = 00:00:37 ; elapsed = 00:00:39 . Memory (MB): peak = 1586.918 ; gain = 716.602 ; free physical = 3608 ; free virtual = 12767
+... [10:54:29] Start Cross Boundary Optimization
+... [10:54:29] Start Area Optimization
+... [10:54:29] Start Timing Optimization
+... [10:54:39] Start Applying XDC Timing Constraints
+... [10:54:39] Start Technology Mapping
+... [10:54:39] Start IO Insertion
+... [10:54:39] Start Flattening Before IO Insertion
+... [10:54:39] Start Final Netlist Cleanup
+... [10:54:39] Start Renaming Generated Instances
+... [10:54:39] Start Rebuilding User Hierarchy
+... [10:54:44] Start Renaming Generated Ports
+... [10:54:44] Start Handling Custom Attributes
+... [10:54:44] Start Renaming Generated Nets
+... [10:54:44] Start Writing Synthesis Report
+... [10:55:37] Starting DRC Task
+... [10:55:52] Starting Logic Optimization Task
+... [10:56:27] Starting Connectivity Check Task
+... [10:56:32] Starting Power Optimization Task
+... [10:57:32] Starting PowerOpt Patch Enables Task
+... [10:57:58] Starting Placer Task
+... [11:02:25] Starting Routing Task
+INFO: [SDSoC 0-0] Creating boot files
+system_linker completed at Thu Dec 08 11:06:42 CST 2016
+All user specified timing constraints are met.
+sds++ log file saved as /tmp/conv_mnist_pc/_sds/reports/sds.log
+

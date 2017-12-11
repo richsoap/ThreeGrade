@@ -106,15 +106,14 @@ int main() {
       resultStack.push(posb);
       posb = result[posb];
     }
-    printf(":%s\n",map[posa]);
+    printf("%s",map[posa]);
     while(!resultStack.empty()) {
-      printf(":%s\n",map[resultStack.top()]);
+      posb = resultStack.top();
       resultStack.pop();
+      printf("->(%d)->%s",dic[posa][posb],map[posb]);
+      posa = posb;
     }
-  }
-  while(true) {
-    if(getchar() == 'q')
-      break;
+    printf("\n");
   }
   return 0;
 }

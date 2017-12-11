@@ -11,3 +11,4 @@ signal is random, so PSD is only controlable thing
 ## ISI
 眼图
 ## MMSE
+符号数据率
