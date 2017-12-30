@@ -123,3 +123,118 @@
 |SG|地|None|
 #### 连接示意图
 ![RS232C连接示意图](graph/RS232C_connect.png)
+## 8251基本功能
+* 通用同步异步收发，全双工，双缓冲
+* 异步，同步通信支持
+* 差错检测
+## 引脚
+### CPU端
+* D7-D0：数据IO
+* RESET
+* CS
+* C//D：端口选择
+* RD
+* WR
+* CLK
+### 调制解调器端
+* RTS
+* CTS
+* DTR
+* DSR
+### 收/发控制
+* TxC：发送时钟
+* RxC：接收时钟
+* TxRDY
+* RxRDY
+* TxE：发送器空闲
+* SYNDET：同步检出
+* RxD：发送数据
+* TxD：接收数据
+## 工作方式
+### 异步
+* 发送：TxEN=1，CTS=0
+* 接收：RxE=1
+### 同步
+* 发送：TxEN=1，CTS=0
+* 接收：RxE=1
+* 内同步：自动搜索同步字符
+* 外同步：借助SYNDET信号线
+## 编程
+### 初始化
+先送三个0，再送一个40H
+```
+MOV DX,2B9H
+MOV AL,0
+OUT DX,AL
+OUT DX,AL
+OUT DX,AL
+MOV AL,40H
+OUT DX,AL
+```
+# 8237
+* DMA适用于高速外设和存储器间大量数据传输
+* 也可用于存储器和存储器的传输，或IO到IO的传输
+* 由DMAC控制
+## 基本过程
+* DMAC接受外设DMA请求
+* 向CPU发出总线 请求
+* CPU发出总线响应，接管总线
+* 向外设发送DMA应答
+* 进行数据传输
+> * 给出存储器地址
+> * 给出IO接口及存储器的控制字
+> * 对传送的字节数进行计数
+
+* 传输结束，向CPU交还总线
+## 工作方式
+### 传输方式
+* 单字节传送：每次DMA请求只传送一个字节，当前地址和字节自动修改，下次DMA请求继续传送，DMAC和CPU轮流控制总线，结束输出EOP
+* 数据块传送：连续传送一个数据块，数据传输效率高，但会持续占用总线，结束后输出EOP，EOP有效则传输结束
+* 请求传输：但DREQ=0时，暂停传输，结束后EOP有效，EOP有效强制终止DMA传送
+* 级联方式：用于扩展DMA通道
+### 传送类型
+* IO到MEM：IOR->BUS，MEMW->存储器
+* MEM到IO：MEMR->BUS,IOW->IO
+* MEM到MEM（使用通道0和1）：MEMR->BUS->内部暂存器->BUS->MEMW
+### 优先级
+* 固定优先级：静态，通道0最高，3最低
+* 循环优先级：动态，最近被服务过的最低，紧跟其后的最高
+## 编程
+![DMA端口说明](graph/dma_prog.jpg)
+### 样例
+需求：外设输入通道0，16K字节，块传输，内存8000H，不自动初始化，DMAC起始位置70H
+```
+OUT 7DH,AL ;RESET
+MOV AL,00H
+OUT 70H,AL;LOW ADDR
+MOV AL,80H
+OUT 70H,AL;HIGH ADDR
+MOV AL,00H
+OUT 71H,AL;LOW COUNTER
+MOV AL,40H
+OUT 71H,AL;HIGH COUNTER
+MOV AL,10000100B
+OUT 7BH,AL;MODE
+MOV AL,10100000
+OUT 78H,AL;COMMAND
+MOV AL,00H
+OUT 7AH,AL;FORBIDDEN REG
+```
+需求：存储器地址6000H:0000H，单字节，32字节，增量，不自动预制，DMAC端口地址00H-0FH，页面寄存器83H，通道1
+```
+OUT OCH,AL; CLEAR FLAGS
+MOV AL,01000101B
+OUT 0BH,AL;MODE
+MOV AL,06H
+OUT 83H,AL;PAGE REG
+MOV AL,00H;
+OUT 02H,AL;LOW ADDR
+MOV AL,00H;
+OUT 02H,AL;HIGH ADDR
+MOV AL,1FH
+OUT 03H,AL;LOW COUNTER
+MOV AL,00H
+OUT 03H,AL;HIGH COUNTER
+MOV AL,00000001B
+OUT OAH,AL;FORBIDDEN REG
+```
