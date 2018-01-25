@@ -1,3 +1,6 @@
+* Essential bandwidth=$R_b=\frac{1}{T_b}$
+* average energy per symbol=$E_s=\frac{1}{n}\sum_{k=1}^n a_k^2$
+* average energy per bit=$E_b=\frac{E_s}{\lceil log_2n\rceil}$
 # Sampling
 ## Sampling and Reconstruction
 ### ABC
@@ -49,7 +52,7 @@ $$E[E[Y|X]]=E[Y]\\
 E[Y|X]=\int yf(y|x)dy\\
 E[E[Y|X]]=\int yf(y|x)dyf(x)dx=E[Y]\\
 \sigma_{xy}=E[(x-\mu_x)(y-\mu_y)]=E[xy]-\mu_x\mu_y\\
-\simga_{xy}=0=>x\ y\ are\ uncorrelate=>f(x|y)=E[XY]=E[X]E[Y]\\
+\sigma_{xy}=0=>x\ y\ are\ uncorrelate=>f(x|y)=E[XY]=E[X]E[Y]\\
 f(x|y)=f(x),f(x,y)=f(x)f(y)=>independence$$
 ### Two Types of Averages
 * ensemble average:E[X(t)]=\int_{-\infty}^{\infty} xf_x(x)dx
@@ -87,3 +90,41 @@ $$S_y(\omega)=|P(\omega)|^2S_x(\omega)\\
 S_x(\omega)=\frac{1}{T_b}\sum_{n=-\infty}^\infty R_ne^{jn\omega T_b}\\
 R_n=E[a_ka_{k+n}]\\
 for\ p(t)=rect(\frac{t}{T_b/2})P(\omega)=\frac{T_b}{2}sinc(\frac{\omega T_b}{4}):width\ =\ T_b$$
+#### Polar
+$R_0=E[a_k^2]=1,R_n=E[a_ka_{k+n}]=E[a_k]E[a_{k+n}]=0$
+#### On-Off Keying
+$R_0=\frac{1}{2},R_n=\frac{1}{4},S_x=\frac{1}{4T_b}(1+\frac{2\pi}{T_b}\sum_{n=-\infty}^\infty\delta(\omega-\frac{2\pi n}{T_b}))=\frac{1}{4T_b}(1+\sum e^{-jn\omega T_b})$<br/>
+级数求和看作无限长δ函数的傅里叶变换:$\sum e^{-jn\omega T_b}=\frac{2\pi}{T_b}\sum\delta(\omega-\frac{2n\pi}{T_b})$
+#### Bipolar
+$R_0=\frac{1}{2},R_1=-\frac{1}{4},R_2=0,R_n=0$
+## Digital Baseband Transmission
+### Inter-Sysbol Interference(ISI)
+* Define $p_i=p(iT_b)$
+* Zero ISI -> $y_n=\sum a_kp_{n_k}=\sum p_ia_{n-i}=\sqrt{E}a_n$
+* Let $p_0=\sqrt{E},y_n=a_n\sqrt{E}+\sum p_ia_{n-i}$
+* $"-"=past,"+"=future$
+### Ideal Nyquist Pulse
+* $p(t)=\sqrt{E}sinc(\frac{t}{T_b})$
+* $P(\omega)=\sqrt{E}/0$
+* $p_i=p(iT_b)=\sqrt{E}/0$
+* $p(f_0)=0.5R_b,R_b=\frac{1}{T_b},R_b\ is\ in\ \omega space$
+### Raised Cosine Spectrum
+$$p(t)=\sqrt{E}sinc(\frac{t}{T_b})(\frac{cos(\alpha t\pi/T_b)}{1-4\alpha^2t^2/T_b^2})\\
+For\ large\ t,envelope\ of\ p(t)\ decays\ in\ \frac{1}{t^3}\\
+Transmission\ bandwidth\ requirement\ B_\tau=\frac{1+\alpha}{2T_b}\\
+Roll-off\ factor\ \alpha=\frac{f_x}{f_0}$$
+### Duobinary Pulse
+$$p(t)=\frac{sin(\pi R_bt)}{\pi R_bt(1-T_bt)}\\
+P(\omega)=\frac{2}{R_b}cos(\frac{\omega}{2R_b})rect(\frac{\omega}{2\pi R_b})e^{-j\frac{\omega}{2R_b}}\\
+p(t)decays\ in\ \frac{1}{t^2}\\
+p_i=1[i=0,1],0$$
+### M-ary Data
+### Eye Diagram
+time function defined on $-\frac{T_b}{2}\leq t\leq\frac{T_b}{2}$,must show the time axis
+### Detector
+* Correlation Receiver:Max:$\int(r(t)-s_i(t))^2dt$
+* Minimum Distance Detector:Max:$\int r(t)s_i(t)-\frac{E_i}{2}$
+* Projection Receiver:Min:$||r-s_i||^2$
+### FSK
+$$\Delta f= \frac{f_m-f_1}{2}=\frac{M-1}{2}\delta f\\
+B_T=2(\frac{M-1}{2}\delta f+f_{carrier})$$
